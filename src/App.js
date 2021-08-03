@@ -4,11 +4,25 @@ import Box from './components/Box';
 import React, { useState, useEffect } from 'react';
 
 function App() {
+  !localStorage.getItem('directions') &&
+    localStorage.setItem(
+      'directions',
+      JSON.stringify({ faster: false, bottom: 0, left: 0 })
+    );
+
+  const rawLocal = localStorage.getItem('directions');
+
+  const parsedLocal = JSON.parse(rawLocal);
+
   const [dir, setDir] = useState({
     faster: false,
-    bottom: 0,
-    left: 0,
+    bottom: parsedLocal.bottom,
+    left: parsedLocal.left,
   });
+
+  useEffect(() => {
+    localStorage.setItem('directions', JSON.stringify(dir));
+  }, [dir]);
 
   useEffect(() => {
     document.addEventListener('keydown', (e) => {
