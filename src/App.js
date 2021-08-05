@@ -1,32 +1,27 @@
 import React, { useState, useEffect } from 'react';
+
 import { useKeyPressed } from './hooks/useKeyPressed';
+import { useLocalStorage } from './hooks/useLocalStorage';
 
 import Box from './components/Box';
-
 import './App.css';
 
 function App() {
-  !localStorage.getItem('directions') &&
-    localStorage.setItem(
-      'directions',
-      JSON.stringify({ faster: false, bottom: 54, left: 45 })
-    );
-
-  const rawLocal = localStorage.getItem('directions');
-
-  const parsedLocal = JSON.parse(rawLocal);
-
-  const [dir, setDir] = useState({
-    faster: false,
-    bottom: parsedLocal.bottom,
-    left: parsedLocal.left,
+  const [localValue, setLocalValue] = useLocalStorage('directions', {
+    bottom: 54,
+    left: 45,
   });
 
-  const [faster, setFaster] = useState(false);
+  const [dir, setDir] = useState({
+    bottom: localValue.bottom,
+    left: localValue.left,
+  });
 
   useEffect(() => {
-    localStorage.setItem('directions', JSON.stringify(dir));
+    setLocalValue(dir);
   }, [dir]);
+
+  const [faster, setFaster] = useState(false);
 
   const isForward = useKeyPressed('ArrowUp');
   const isBackward = useKeyPressed('ArrowDown');
