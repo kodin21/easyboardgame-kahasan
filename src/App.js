@@ -1,5 +1,6 @@
 import './App.css';
 import Box from './components/Box';
+import Background from './background.png';
 
 import React, { useState, useEffect } from 'react';
 
@@ -7,7 +8,7 @@ function App() {
   !localStorage.getItem('directions') &&
     localStorage.setItem(
       'directions',
-      JSON.stringify({ faster: false, bottom: 0, left: 0 })
+      JSON.stringify({ faster: false, bottom: 54, left: 45 })
     );
 
   const rawLocal = localStorage.getItem('directions');
@@ -43,8 +44,7 @@ function App() {
         }));
       }
     });
-    return () =>
-      document.removeEventListener('keydown keyup', console.log('removed'));
+    return () => document.removeEventListener('keydown keyup', console.log(''));
   }, []);
 
   useEffect(() => {
@@ -53,12 +53,12 @@ function App() {
         setDir((prevState) => ({
           faster: prevState.faster,
           bottom:
-            prevState.bottom < 480
+            prevState.bottom < 429
               ? prevState.bottom +
                 (prevState.faster
-                  ? prevState.bottom + 50 < 480
+                  ? prevState.bottom + 50 < 429
                     ? 50
-                    : 480 - prevState.bottom
+                    : 429 - prevState.bottom
                   : 10)
               : prevState.bottom,
           left: prevState.left,
@@ -67,7 +67,7 @@ function App() {
         setDir((prevState) => ({
           faster: prevState.faster,
           bottom:
-            prevState.bottom <= 480 && prevState.bottom > 0
+            prevState.bottom <= 429 && prevState.bottom > 0
               ? prevState.bottom - 10
               : prevState.bottom,
           left: prevState.left,
@@ -76,23 +76,29 @@ function App() {
         setDir((prevState) => ({
           faster: prevState.faster,
           left:
-            prevState.left <= 480 && prevState.left > 0
+            prevState.left <= 437 && prevState.left > 0
               ? prevState.left - 10
               : prevState.left,
           bottom: prevState.bottom,
         }));
-        console.log(dir);
       } else if (e.code === 'ArrowRight') {
         setDir((prevState) => ({
           faster: prevState.faster,
-          left: prevState.left < 480 ? prevState.left + 10 : prevState.left,
+          left:
+            prevState.left < 437
+              ? prevState.left +
+                (prevState.faster
+                  ? prevState.left + 50 < 437
+                    ? 50
+                    : 437 - prevState.left
+                  : 10)
+              : prevState.left,
           bottom: prevState.bottom,
         }));
       }
     });
 
-    return () =>
-      document.removeEventListener('keydown', console.log('removed'));
+    return () => document.removeEventListener('keydown', console.log(''));
   }, []);
 
   return (
