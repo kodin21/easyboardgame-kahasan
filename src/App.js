@@ -1,8 +1,9 @@
-import './App.css';
-import Box from './components/Box';
-import Background from './background.png';
-
 import React, { useState, useEffect } from 'react';
+import { useKeyPressed } from './hooks/useKeyPressed';
+
+import Box from './components/Box';
+
+import './App.css';
 
 function App() {
   !localStorage.getItem('directions') &&
@@ -21,89 +22,84 @@ function App() {
     left: parsedLocal.left,
   });
 
+  const [faster, setFaster] = useState(false);
+
   useEffect(() => {
     localStorage.setItem('directions', JSON.stringify(dir));
   }, [dir]);
 
-  useEffect(() => {
-    document.addEventListener('keydown', (e) => {
-      if (e.code === 'Space') {
-        setDir((prevState) => ({
-          faster: true,
-          bottom: prevState.bottom,
-          left: prevState.left,
-        }));
-      }
-    });
-    document.addEventListener('keyup', (e) => {
-      if (e.code === 'Space') {
-        setDir((prevState) => ({
-          faster: false,
-          bottom: prevState.bottom,
-          left: prevState.left,
-        }));
-      }
-    });
-    return () => document.removeEventListener('keydown keyup', console.log(''));
-  }, []);
+  const isForward = useKeyPressed('ArrowUp');
+  const isBackward = useKeyPressed('ArrowDown');
+  const isLeftward = useKeyPressed('ArrowLeft');
+  const isRightward = useKeyPressed('ArrowRight');
+
+  const isFaster = useKeyPressed('Space');
 
   useEffect(() => {
-    document.addEventListener('keydown', (e) => {
-      if (e.code === 'ArrowUp') {
-        setDir((prevState) => ({
-          faster: prevState.faster,
-          bottom:
-            prevState.bottom < 429
-              ? prevState.bottom +
-                (prevState.faster
-                  ? prevState.bottom + 50 < 429
-                    ? 50
-                    : 429 - prevState.bottom
-                  : 10)
-              : prevState.bottom,
-          left: prevState.left,
-        }));
-      } else if (e.code === 'ArrowDown') {
-        setDir((prevState) => ({
-          faster: prevState.faster,
-          bottom:
-            prevState.bottom <= 429 && prevState.bottom > 0
-              ? prevState.bottom - 10
-              : prevState.bottom,
-          left: prevState.left,
-        }));
-      } else if (e.code === 'ArrowLeft') {
-        setDir((prevState) => ({
-          faster: prevState.faster,
-          left:
-            prevState.left <= 437 && prevState.left > 0
-              ? prevState.left - 10
-              : prevState.left,
-          bottom: prevState.bottom,
-        }));
-      } else if (e.code === 'ArrowRight') {
-        setDir((prevState) => ({
-          faster: prevState.faster,
-          left:
-            prevState.left < 437
-              ? prevState.left +
-                (prevState.faster
-                  ? prevState.left + 50 < 437
-                    ? 50
-                    : 437 - prevState.left
-                  : 10)
-              : prevState.left,
-          bottom: prevState.bottom,
-        }));
-      }
-    });
+    setFaster(isFaster);
+  }, [isFaster]);
 
-    return () => document.removeEventListener('keydown', console.log(''));
-  }, []);
+  const fast = faster ? 50 : 10;
+
+  const calculateBottom = (bottom, maxBottom) => {
+    if (bottom < maxBottom) {
+      return bottom + fast;
+    }
+    return bottom;
+  };
+
+  const calculateLeft = (left, maxLeft) => {
+    if (left < maxLeft) {
+      return left + fast;
+    }
+    return left;
+  };
+
+  const calculateRight = (right, maxRight) => {
+    if (right > maxRight) {
+      return right - fast;
+    }
+    return right;
+  };
+
+  const calculateTop = (top, maxTop) => {
+    if (top > maxTop) {
+      return top - fast;
+    }
+    return top;
+  };
+
+  useEffect(() => {
+    if (isForward) {
+      setDir(() => ({
+        faster: dir.faster,
+        bottom: calculateBottom(dir.bottom, 420),
+        left: dir.left,
+      }));
+    } else if (isBackward) {
+      setDir(() => ({
+        faster: dir.faster,
+        bottom: calculateTop(dir.bottom, 54),
+        left: dir.left,
+      }));
+    } else if (isLeftward) {
+      setDir(() => ({
+        faster: dir.faster,
+        left: calculateRight(dir.left, 45),
+        bottom: dir.bottom,
+      }));
+    } else if (isRightward) {
+      setDir(() => ({
+        faster: dir.faster,
+        left: calculateLeft(dir.left, 435),
+        bottom: dir.bottom,
+      }));
+    }
+  }, [isForward, isBackward, isLeftward, isRightward]);
 
   return (
     <div className="App">
-      <Box dir={dir} />
+      <Box dir={dir} faster={faster} />
     </div>
   );
 }

@@ -1,14 +1,12 @@
 import Char from './Char';
 
-function Box({ dir }) {
+function Box({ dir, faster }) {
   return (
     <div className="Box">
       <Char dir={dir} />
-      {dir.faster && <div className="indicator">2x</div>}
+      {faster && <div className="indicator">2x</div>}
     </div>
   );
 }
-var Box2 = document.querySelector('#Box');
-console.log(Box2);
 
 export default Box;
