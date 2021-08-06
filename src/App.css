@@ -15,23 +15,6 @@
   background-size: 500px 500px;
 }
 
-.circle {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-radius: 100%;
-  background-color: #eceece85;
-  transition: left 300ms linear, bottom 300ms linear;
-}
-
-.square {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  background-color: #ff4f6c85;
-  transition: left 300ms linear, bottom 300ms linear;
-}
-
 .indicator {
   font-size: 96px;
   color: rgba(255, 255, 255, 0.555);

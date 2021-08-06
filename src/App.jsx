@@ -1,92 +1,70 @@
 import React, { useState, useEffect } from 'react';
+import './App.css';
+import Box from './components/Box';
+import Char from './components/Char';
+import CharOptions from './components/CharOptions';
+
+import {
+  calculateBottom, calculateLeft, calculateRight, calculateTop,
+} from './helpers/characterMovements';
 
 import useKeyPressed from './hooks/useKeyPressed';
 import useLocalStorage from './hooks/useLocalStorage';
 
-import Box from './components/Box';
-import './App.css';
-
 function App() {
-  const [localValue, setLocalValue] = useLocalStorage('directions', {
+  const [faster, setFaster] = useState(false);
+  const [charType, setCharType] = useState('circle');
+  const [dir, setDir] = useState({
     bottom: 54,
     left: 45,
   });
 
-  const [dir, setDir] = useState({
-    bottom: localValue.bottom,
-    left: localValue.left,
-  });
-
-  useEffect(() => {
-    setLocalValue(dir);
-  }, [dir, setLocalValue]);
-
-  const [faster, setFaster] = useState(false);
-
+  const isFaster = useKeyPressed('Space');
   const isForward = useKeyPressed('ArrowUp');
   const isBackward = useKeyPressed('ArrowDown');
   const isLeftward = useKeyPressed('ArrowLeft');
   const isRightward = useKeyPressed('ArrowRight');
 
-  const isFaster = useKeyPressed('Space');
+  const [charPosition, setCharPosition] = useLocalStorage('directions', {
+    bottom: 54,
+    left: 45,
+  });
+
+  useEffect(() => {
+    setDir(charPosition);
+  }, []);
+
+  useEffect(() => {
+    setCharPosition(dir);
+  }, [dir]);
 
   useEffect(() => {
     setFaster(isFaster);
   }, [isFaster]);
 
-  const fast = faster ? 50 : 10;
-
-  const calculateBottom = (bottom, maxBottom) => {
-    if (bottom < maxBottom) {
-      return bottom + fast;
-    }
-    return bottom;
-  };
-
-  const calculateLeft = (left, maxLeft) => {
-    if (left < maxLeft) {
-      return left + fast;
-    }
-    return left;
-  };
-
-  const calculateRight = (right, maxRight) => {
-    if (right > maxRight) {
-      return right - fast;
-    }
-    return right;
-  };
-
-  const calculateTop = (top, maxTop) => {
-    if (top > maxTop) {
-      return top - fast;
-    }
-    return top;
-  };
-
   useEffect(() => {
     if (isForward) {
       setDir(() => ({
         faster: dir.faster,
-        bottom: calculateBottom(dir.bottom, 420),
+        bottom: calculateBottom(dir.bottom, 420, faster),
         left: dir.left,
       }));
     } else if (isBackward) {
       setDir(() => ({
         faster: dir.faster,
-        bottom: calculateTop(dir.bottom, 54),
+        bottom: calculateTop(dir.bottom, 54, faster),
         left: dir.left,
       }));
     } else if (isLeftward) {
       setDir(() => ({
         faster: dir.faster,
-        left: calculateRight(dir.left, 45),
+        left: calculateRight(dir.left, 45, faster),
         bottom: dir.bottom,
       }));
     } else if (isRightward) {
       setDir(() => ({
         faster: dir.faster,
-        left: calculateLeft(dir.left, 435),
+        left: calculateLeft(dir.left, 435, faster),
         bottom: dir.bottom,
       }));
     }
@@ -94,7 +72,11 @@ function App() {
 
   return (
     <div className="App">
-      <Box dir={dir} faster={faster} />
+      <CharOptions setChar={setCharType} />
+      <Box>
+        <Char dir={dir} charType={charType} />
+        {faster && <div className="indicator">2x</div>}
+      </Box>
     </div>
   );
 }

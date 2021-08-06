@@ -2,10 +2,12 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-function Char({ dir, className }) {
+import styles from './Char.module.css';
+
+function Char({ dir, charType }) {
   return (
     <div
-      className={className}
+      className={styles[charType]}
       style={{ left: `${dir.left}px`, bottom: `${dir.bottom}px` }}
     />
   );
@@ -16,7 +18,7 @@ Char.propTypes = {
     left: PropTypes.number,
     bottom: PropTypes.number,
   }).isRequired,
-  className: PropTypes.string.isRequired,
+  charType: PropTypes.string.isRequired,
 };
 
 export default Char;
