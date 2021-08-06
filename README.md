@@ -1,33 +1,17 @@
-## Ödevi aşağıdaki linke taşıdım:
+Click [🚀here](https://easyboardgame-kahasan.vercel.app) for demo !
 
-https://github.com/kahasan/easyboardgame-kahasan
+## Getting Started with Create React App
 
-# HAFTA 4 - ÖDEV
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# React mix example
+## Available Scripts
 
-- Bu proje tamamen ReactJS kullanılarak yapılacaktır.
-- React'in Virtual DOM mantıgini bozmayan yardimci kutuphane kullanabilirsiniz. (Kesinlikle JQuery gibi DOM'a direk mudahale eden kutuphane kullanmak yasaktır.)
+In the project directory, you can run:
 
-Ne istiyoruz?
+### `yarn start`
 
-- Ekranda 500px X 500px boyutunda köşe renkleri olan bir alan (oyun tahtasi) oluşturun.
-- Bir karakter component'i oluşturun. Bu karakter 20px x 20px bir kare de olabilir sizin göstermek istediginiz bir image da olabilir.
-- Uygulama acildiginda karakterimiz bu oyun tahtasinda yukari, asagi, sag, sol ok tuslariyla hareket edebilsin istiyoruz. 
-- Space tusuna basili tutulursa karakterin hareket etme hızı iki katına çıkmalı.
-- Sayfa yenilenirse karakter kaldigi yerden devam etmeli.
-- Karakter oyun tahtasindan cikamamali.
-- Ekranda bulunan bir dropdown ile karakter degistirilebilir. Yani birden cok karakter componenti (en az 2) yapmanizi istiyorum.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-- Uygulamayı tamamen React hooks ile yapmayı deneyin. Kendi hooklarinizi yazmakta cekinmeyin.
-- Olabildigince duzenli kod yazmayi deneyin. Birden cok component olusturun.
-- Istediginiz bir ESLint kuralini takip edin.
-- Opsiyonel olarak uygulamanızı vercel, netlify v.b bir servise deploy edin ve linki readme dosyaniza ekleyin. 
-- Arkadaslarinizla discord uzerinden code-review yapin. En az 1 kere! Yazdiginiz kodlari karsilikli olarak nasil daha iyi hale getirebilirsiniz buna bakin.
-
-
-Daha iyi anlasilmasi icin ornek resimler.
-(Burada mario ve kare karakterleri yukari, asagi, sag, sol ok tuslariyla hareket edebiliyor. )
-
-<img width="657" alt="Screen Shot 2021-08-02 at 18 49 38" src="https://user-images.githubusercontent.com/6469914/127889099-c052d9dd-981a-4d0b-90a4-ce0c5747094c.png">
-<img width="635" alt="Screen Shot 2021-08-02 at 18 49 47" src="https://user-images.githubusercontent.com/6469914/127889106-d96d075f-8076-47dd-8ead-79b542f639eb.png">
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
