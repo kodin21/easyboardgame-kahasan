@@ -58,7 +58,10 @@ function Box({ dir, faster }) {
 }
 
 Box.propTypes = {
-  dir: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+  dir: PropTypes.shape({
+    left: PropTypes.number,
+    bottom: PropTypes.number,
+  }).isRequired,
   faster: PropTypes.bool.isRequired,
 };
 
