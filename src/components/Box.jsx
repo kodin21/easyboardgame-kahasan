@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Char from './Char';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 function Box({ dir, faster }) {
   const [data, setData] = useLocalStorage('selectedChar', 'circle');
@@ -26,6 +27,7 @@ function Box({ dir, faster }) {
             checked={style === 'circle'}
             onChange={handler}
           />
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label className="btn btn-outline-success" htmlFor="btnradio1">
             Circle
           </label>
@@ -40,6 +42,7 @@ function Box({ dir, faster }) {
             checked={style === 'square'}
             onChange={handler}
           />
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label className="btn btn-outline-success" htmlFor="btnradio2">
             Square
           </label>
@@ -53,5 +56,10 @@ function Box({ dir, faster }) {
     </>
   );
 }
+
+Box.propTypes = {
+  dir: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+  faster: PropTypes.bool.isRequired,
+};
 
 export default Box;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { useKeyPressed } from './hooks/useKeyPressed';
-import { useLocalStorage } from './hooks/useLocalStorage';
+import useKeyPressed from './hooks/useKeyPressed';
+import useLocalStorage from './hooks/useLocalStorage';
 
 import Box from './components/Box';
 import './App.css';

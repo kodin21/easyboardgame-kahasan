@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useState, useEffect } from 'react';
 
 const getSavedData = (key, initialValue) => {
@@ -10,10 +11,8 @@ const getSavedData = (key, initialValue) => {
   return initialValue;
 };
 
-export const useLocalStorage = (key, initialValue) => {
-  const [data, setData] = useState(() => {
-    return getSavedData(key, initialValue);
-  });
+const useLocalStorage = (key, initialValue) => {
+  const [data, setData] = useState(() => getSavedData(key, initialValue));
 
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(data));
@@ -21,3 +20,5 @@ export const useLocalStorage = (key, initialValue) => {
 
   return [data, setData];
 };
+
+export default useLocalStorage;

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import React, { useState } from 'react';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const Charlist = () => {
   const [data, setData] = useLocalStorage('selectedChar', 'circle');

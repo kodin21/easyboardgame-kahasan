@@ -1,12 +1,11 @@
+/* eslint-disable no-undef */
 import { useState, useEffect } from 'react';
 
 const noop = () => {};
 
-export const useKeyPressed = (givenKey, handler = noop) => {
+const useKeyPressed = (givenKey, handler = noop) => {
   const [isKeyPressed, setIsKeyPressed] = useState(false);
-  const isSameKey = (givenKey, pressedKey) =>
-    givenKey.toLowerCase() === pressedKey.toLowerCase();
-
+  const isSameKey = (key, pressedKey) => key.toLowerCase() === pressedKey.toLowerCase();
   const handleKeyDown = (event) => {
     if (isSameKey(givenKey, event.code)) {
       setIsKeyPressed(true);
@@ -32,3 +31,5 @@ export const useKeyPressed = (givenKey, handler = noop) => {
 
   return isKeyPressed;
 };
+
+export default useKeyPressed;
