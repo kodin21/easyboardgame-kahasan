@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     setLocalValue(dir);
-  }, [dir]);
+  }, [dir, setLocalValue]);
 
   const [faster, setFaster] = useState(false);
 

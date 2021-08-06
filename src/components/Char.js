@@ -1,7 +1,7 @@
-function Char({ dir }) {
+function Char({ dir, className }) {
   return (
     <div
-      className="Char"
+      className={className}
       style={{ left: `${dir.left}px`, bottom: `${dir.bottom}px` }}
     ></div>
   );

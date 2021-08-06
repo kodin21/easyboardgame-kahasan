@@ -5,6 +5,8 @@ const getSavedData = (key, initialValue) => {
 
   if (savedValue) return savedValue;
 
+  if (initialValue instanceof Function) return initialValue();
+
   return initialValue;
 };
 
@@ -15,7 +17,7 @@ export const useLocalStorage = (key, initialValue) => {
 
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(data));
-  }, [data]);
+  }, [data, key]);
 
   return [data, setData];
 };
