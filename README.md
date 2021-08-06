@@ -1,5 +1,3 @@
-# Basic board game
-
 Click [🚀here](https://easyboardgame-kahasan.vercel.app) for demo !
 
 ## Getting Started with Create React App
