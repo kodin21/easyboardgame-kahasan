@@ -9,7 +9,7 @@ const useKeyPressed = (givenKey, handler = noop) => {
   const handleKeyDown = (event) => {
     if (isSameKey(givenKey, event.code)) {
       setIsKeyPressed(true);
-      handler(event);
+      handler();
     }
   };
 
@@ -27,7 +27,7 @@ const useKeyPressed = (givenKey, handler = noop) => {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
     };
-  }, [isKeyPressed]);
+  }, []);
 
   return isKeyPressed;
 };
