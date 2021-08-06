@@ -1,4 +1,8 @@
-## HAFTA 4 - ÖDEV
+## Ödevi aşağıdaki linke taşıdım:
+
+https://github.com/kahasan/easyboardgame-kahasan
+
+# HAFTA 4 - ÖDEV
 
 # React mix example
 
