@@ -7,7 +7,7 @@ import CharModels from '../../configs/CharModels';
 export default function CharOptions({ setChar }) {
   const [selectedOption, setSelectedOption] = useState('circle');
   return (
-    <div className="btn-group-vertical">
+    <div className="btn-group-vertical charlist">
       {
       CharModels.map((model) => (
         <Option

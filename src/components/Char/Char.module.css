@@ -11,14 +11,6 @@
   position: absolute;
   width: 18px;
   height: 18px;
-  background-color: green;
-  transition: left 300ms linear, bottom 300ms linear;
-}
-
-.redSquare {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  background-color: #ff4f6c85;
+  background-color: #adeade;
   transition: left 300ms linear, bottom 300ms linear;
 }

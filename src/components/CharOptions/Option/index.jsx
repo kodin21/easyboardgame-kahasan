@@ -7,7 +7,7 @@ const Option = ({
   <>
     <button
       type="button"
-      className={`btn btn-${selectedOption === value ? 'success' : 'info'}`}
+      className={`btn btn-${selectedOption === value ? 'success' : 'light'}`}
       name="btnradio"
       id={id}
       value={value}
